@@ -1,5 +1,5 @@
 var http = require('http');
-var dt = require('./myfirstmodule');
+var dt = require('../myfirstmodule');
 
 http.createServer(function (req, res) {
     // writeHead is the method to set the HTTP status code
