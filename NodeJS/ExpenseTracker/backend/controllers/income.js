@@ -28,3 +28,24 @@ exports.addIncome = async (req, res) => {
 
     console.log(income)
 }
+
+exports.getIncome = async (req, res) => {
+    try {
+        const incomes = await IncomeSchema.find().sort({createdAt: -1})
+        res.status(200).json(incomes)
+    } catch (error) {
+        res.status(500).json({message: "Internal server error"})
+    }
+}
+
+exports.deleteIncome = async (req, res) => {
+    // Params is the object that contains the URL parameters
+    const {id} = req.params;
+    IncomeSchema.findByIdAndDelete(id)
+        .then((income) => {
+            res.status(200).json({message: "Income deleted successfully"})
+        })
+        .catch((error) => {
+            res.status(500).json({message: "Internal server error"})
+        })
+}
